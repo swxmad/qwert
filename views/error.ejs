@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ошибка — Личные Финансы</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Личные Финансы</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/deposit">Пополнить</a>
+      <a href="/spend">Оплатить покупку</a>
+      <a href="/transfer">Перевести</a>
+    </nav>
+    <hr />
+
+    <div class="error">
+      <h2>Ошибка</h2>
+      <p><%= message || 'Произошла неизвестная ошибка.' %></p>
+    </div>
+
+    <a href="/">← Вернуться к кошельку</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Личные Финансы</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Личные Финансы</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/deposit">Пополнить</a>
+      <a href="/spend">Оплатить покупку</a>
+      <a href="/transfer">Перевести</a>
+    </nav>
+    <hr />
+
+    <div class="balance">
+      <strong>Текущий баланс кошелька "<%= wallet.name %>":</strong> <%= Number(wallet.balance).toFixed(2) %> ₽
+    </div>
+
+    <h2>История операций</h2>
+    <% if (locals.transactions && transactions.length === 0) { %>
+      <p>Пока нет операций.</p>
+    <% } else if (locals.transactions) { %>
+      <% transactions.forEach(t => { %>
+        <div class="transaction">
+          <strong>
+            <% if (t.type === 'deposit') { %>
+              Пополнение
+            <% } else if (t.type === 'spend') { %>
+              🛒 Покупка
+            <% } else if (t.type === 'transfer') { %>
+              Перевод
+            <% } %>
+          </strong>
+          на сумму <strong><%= Number(t.amount).toFixed(2) %> ₽</strong>
+          <% if (t.description) { %>
+            — "<%= t.description %>"
+          <% } %>
+          <% if (t.type === 'transfer') { %>
+            → получатель: "<%= t.toWalletName %>"
+          <% } %>
+          <br>
+          <small><%= new Date(t.createdAt).toLocaleDateString('ru-RU') %> в <%= new Date(t.createdAt).toLocaleTimeString('ru-RU', { hour12: false }) %></small>
+        </div>
+      <% }); %>
+    <% } %>
+
+  </div>
+</body>
+</html>
